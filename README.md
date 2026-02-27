@@ -1,3 +1,1 @@
 # DataScience4A
-
-mdr
