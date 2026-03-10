@@ -3,7 +3,7 @@ import glob
 import matplotlib.pyplot as plt
 
 # 1. Lister tous les fichiers CSV qui commencent par "Day-ahead Prices"
-fichiers = glob.glob("Day-ahead Prices_*.csv")
+fichiers = glob.glob("Prix/Day-ahead Prices_*.csv")
 print("Fichiers trouvés :", fichiers) # <-- AJOUTEZ CETTE LIGNE
 
 if len(fichiers) == 0:

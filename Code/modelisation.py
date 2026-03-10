@@ -7,14 +7,19 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_absolute_error, r2_score
 
 print("1. Chargement du jeu de données préparé...")
-df = pd.read_csv('Master_Dataset_Projet_ML.csv', index_col=0, parse_dates=True)
+df = pd.read_csv('génération graph/Master_Dataset_Projet_ML_V2.csv', index_col=0, parse_dates=True)
 
 # 2. Définition des Features (X) et de la Target (y)
 # On enlève la cible (Prix) de X. On enlève aussi "Température" si on veut éviter les doublons avec "Consommation" 
 # (car la conso inclut déjà l'effet température), mais on peut la laisser pour le Random Forest.
-X = df[['Consommation (MW)', 'Eolien (MW)', 'Solaire (MW)', 'Nucléaire (MW)', 
-        'Température réalisée lissée (°C)', 'Pseudo rayonnement (%)', 
-        'Mois', 'Jour_Semaine', 'Heure']]
+colonnes_X = [
+    'Consommation (MW)', 'Eolien (MW)', 'Solaire (MW)', 'Nucléaire (MW)',
+    'Température réalisée lissée (°C)', 
+    'Vitesse du vent à 100m (m/s)', 'Rayonnement solaire global (W/m2)', # Vos nouveautés physiques !
+    'FC moyen mensuel éolien (%)', 'FC moyen mensuel solaire (%)',       # Vos nouveautés de capacité !
+    'Mois', 'Jour_Semaine', 'Heure'
+]
+X = df[colonnes_X]
 y = df['Price_EUR_MWh']
 
 print("2. Séparation Train / Test (Critère 6)...")
@@ -62,5 +67,5 @@ plt.barh(range(len(indices)), importances[indices], color='teal', align='center'
 plt.yticks(range(len(indices)), [X.columns[i] for i in indices])
 plt.xlabel("Poids relatif")
 plt.tight_layout()
-plt.savefig('feature_importance.png')
+plt.savefig('génération graph/feature_importance.png')
 print("Graphique d'importance des variables sauvegardé !")

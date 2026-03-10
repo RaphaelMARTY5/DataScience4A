@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 print("Chargement des données éCO2mix...")
 # 1. Lecture des données
-df_eco = pd.read_csv("eco2mix-national-cons-def.csv", sep=";")
+df_eco = pd.read_csv("EnR & nucléaire/eco2mix-national-cons-def.csv", sep=";")
 
 # 2. Sélection des colonnes essentielles
 cols_eco = ['Date et Heure', 'Consommation (MW)', 'Eolien (MW)', 'Solaire (MW)', 'Nucléaire (MW)']

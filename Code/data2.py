@@ -3,7 +3,7 @@ import glob
 import matplotlib.pyplot as plt
 
 # 1. Lister les fichiers qui commencent par "donnees-de-temperature"
-fichiers_meteo = glob.glob("donnees-de-temperature-et-de-pseudo-rayonnement_*.csv")
+fichiers_meteo = glob.glob("temperature/donnees-de-temperature-et-de-pseudo-rayonnement_*.csv")
 fichiers_meteo.sort()
 
 # Vérification (pour éviter la même erreur ValueError)

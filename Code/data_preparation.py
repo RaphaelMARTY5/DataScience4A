@@ -3,7 +3,7 @@ import glob
 import re
 
 print("--- 1. PRIX DE L'ÉLECTRICITÉ (AVEC LECTURE INTELLIGENTE) ---")
-fichiers_prix = glob.glob("Day-ahead Prices_*.csv")
+fichiers_prix = glob.glob("Prix/Day-ahead Prices_*.csv")
 dfs_prix = []
 
 for f in fichiers_prix:
@@ -69,7 +69,7 @@ df_prix.sort_index(inplace=True)
 
 
 print("--- 2. TEMPÉRATURE & RAYONNEMENT ---")
-fichiers_meteo = glob.glob("donnees-de-temperature-et-de-pseudo-rayonnement_*.csv")
+fichiers_meteo = glob.glob("temperature/donnees-de-temperature-et-de-pseudo-rayonnement_*.csv")
 dfs_meteo = [pd.read_csv(f, sep=';') for f in fichiers_meteo]
 
 df_meteo = pd.concat(dfs_meteo, ignore_index=True)
@@ -81,7 +81,7 @@ df_meteo_horaire = df_meteo[['Température réalisée lissée (°C)', 'Pseudo ra
 
 print("--- 3. PRODUCTION & CONSOMMATION (éCO2mix) ---")
 # C'est cette partie qui manquait dans votre code !
-df_eco = pd.read_csv("eco2mix-national-cons-def.csv", sep=";")
+df_eco = pd.read_csv("EnR & nucléaire/eco2mix-national-cons-def.csv", sep=";")
 cols_eco = ['Date et Heure', 'Consommation (MW)', 'Eolien (MW)', 'Solaire (MW)', 'Nucléaire (MW)']
 df_eco = df_eco[cols_eco]
 df_eco['Date et Heure'] = pd.to_datetime(df_eco['Date et Heure'], utc=True)
@@ -109,5 +109,5 @@ print(df_final.info())
 print("\nExtrait :\n", df_final.head())
 
 # Sauvegarde de la base d'apprentissage
-df_final.to_csv('Master_Dataset_Projet_ML.csv')
+df_final.to_csv('génération graph/Master_Dataset_Projet_ML.csv')
 print("\n[SUCCÈS] Le fichier 'Master_Dataset_Projet_ML.csv' contient toutes les données !")
